@@ -134,27 +134,5 @@ asadmin deploy taller-ear/target/taller.ear
 | `/taller-war/cursos.xhtml` | Registrar cursos con código, créditos, semestre y cupos |
 | `/taller-war/inscripcion.xhtml` | Inscribir/retirar estudiantes en cursos (N:M) |
 
-## Puntos clave para exponer
 
-1. **Proyecto EAR con 3 módulos** — EJB + WAR + EAR, patrón estándar Java EE.
-2. **Entidades JPA con anotaciones** — `@Entity`, `@Table`, `@Id`, `@EmbeddedId`.
-3. **PK compuesta** — `CarrospartesPK` con `@Embeddable`.
-4. **Relación N:M en Carros/Partes** — a través de tabla intermedia con datos extra (cantidad).
-5. **Relación N:M en Estudiante/Curso** — `@ManyToMany` + `@JoinTable`.
-6. **Patrón AbstractFacade + FacadeLocal** — reutilización CRUD genérico.
-7. **EJB Session Beans (`@Stateless`)** — transacciones gestionadas por el contenedor.
-8. **JSF 2.2 con Managed Beans** — `@ManagedBean` + `@EJB` para consumir la capa de negocio.
 
-## Subir a GitHub
-
-```bash
-cd taller
-git init
-git add .
-git commit -m "feat: Laboratorio 3 - Aplicación empresarial con EJB+JPA"
-git branch -M main
-git remote add origin https://github.com/Diegoab02/laboratorio-3-ejb-jpa.git
-git push -u origin main
-```
-
-Entregar la URL del repositorio en Moodle antes de la fecha de vencimiento.
