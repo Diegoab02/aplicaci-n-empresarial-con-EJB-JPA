@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Inscripciones (N:M)</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Inscripción — Estudiantes ↔ Cursos</h1>
+            <p class="subtitle">Relación muchos-a-muchos: un estudiante toma varios cursos y un curso lo toman varios estudiantes.</p>
+            <nav>
+                <h:link outcome="index" value="← Carros/Partes"/>
+                | <h:link outcome="estudiantes" value="Estudiantes"/>
+                | <h:link outcome="cursos" value="Cursos"/>
+            </nav>
+
+            <h:panelGroup rendered="#{not empty inscripcionBean.mensaje}">
+                <div class="alert">#{inscripcionBean.mensaje}</div>
+            </h:panelGroup>
+
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Estudiante:"/>
+                    <h:selectOneMenu value="#{inscripcionBean.estudianteId}" required="true">
+                        <f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
+                        <f:selectItems value="#{inscripcionBean.estudiantes}" var="e"
+                                       itemLabel="#{e.nombre} (#{e.edad} años)"
+                                       itemValue="#{e.id}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Curso:"/>
+                    <h:selectOneMenu value="#{inscripcionBean.cursoCodigo}" required="true">
+                        <f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
+                        <f:selectItems value="#{inscripcionBean.cursos}" var="c"
+                                       itemLabel="#{c.codigo} — #{c.nombre} (#{c.cuposDisponibles}/#{c.cuposAdmitidos})"
+                                       itemValue="#{c.codigo}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton value="Inscribir" action="#{inscripcionBean.inscribir}"/>
+                <h:commandButton value="Retirar" action="#{inscripcionBean.retirar}"/>
+            </h:form>
+
+            <h2>Matrícula actual por curso</h2>
+            <h:dataTable value="#{inscripcionBean.cursos}" var="c" border="1" cellpadding="6">
+                <h:column><f:facet name="header">Curso</f:facet>#{c.codigo} #{c.nombre}</h:column>
+                <h:column><f:facet name="header">Inscritos</f:facet>
+                    <h:dataTable value="#{c.estudiantes}" var="est">
+                        <h:column>#{est.nombre}</h:column>
+                    </h:dataTable>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</html>

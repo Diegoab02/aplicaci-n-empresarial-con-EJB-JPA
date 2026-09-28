@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Taller JEE — Asociar parte a carro</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Taller JEE + EJB + JPA</h1>
+            <p class="subtitle">Asociar una parte a un carro (relación N:M).</p>
+
+            <nav>
+                <h:link outcome="index" value="Carros/Partes"/>
+                |
+                <h:link outcome="estudiantes" value="Estudiantes"/>
+                |
+                <h:link outcome="cursos" value="Cursos"/>
+                |
+                <h:link outcome="inscripcion" value="Inscripciones"/>
+            </nav>
+
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="codigoParte" value="Código de la parte:"/>
+                    <h:inputText id="codigoParte" value="#{indexBean.codigoParte}" required="true"/>
+
+                    <h:outputLabel for="placaCarro" value="Placa del carro:"/>
+                    <h:inputText id="placaCarro" value="#{indexBean.placaCarro}" required="true"/>
+
+                    <h:outputLabel for="cantidad" value="Cantidad:"/>
+                    <h:inputText id="cantidad" value="#{indexBean.cantidad}" required="true"/>
+                </h:panelGrid>
+
+                <h:commandButton value="Guardar" action="#{indexBean.guardar}"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>

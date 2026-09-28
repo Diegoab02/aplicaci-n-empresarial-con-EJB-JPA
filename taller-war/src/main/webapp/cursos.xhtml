@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cursos</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Cursos</h1>
+            <nav>
+                <h:link outcome="index" value="← Carros/Partes"/>
+                | <h:link outcome="estudiantes" value="Estudiantes"/>
+                | <h:link outcome="inscripcion" value="Inscripciones"/>
+            </nav>
+
+            <h2>Registrar curso</h2>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Código:"/>
+                    <h:inputText value="#{cursoBean.codigo}" required="true"/>
+                    <h:outputLabel value="Nombre:"/>
+                    <h:inputText value="#{cursoBean.nombre}" required="true"/>
+                    <h:outputLabel value="Créditos:"/>
+                    <h:inputText value="#{cursoBean.creditos}" required="true"/>
+                    <h:outputLabel value="Semestre:"/>
+                    <h:inputText value="#{cursoBean.semestre}" required="true"/>
+                    <h:outputLabel value="Cupos admitidos:"/>
+                    <h:inputText value="#{cursoBean.cuposAdmitidos}" required="true"/>
+                </h:panelGrid>
+                <h:commandButton value="Registrar" action="#{cursoBean.guardar}"/>
+            </h:form>
+
+            <h2>Cursos registrados</h2>
+            <h:dataTable value="#{cursoBean.cursos}" var="c" border="1" cellpadding="6">
+                <h:column><f:facet name="header">Código</f:facet>#{c.codigo}</h:column>
+                <h:column><f:facet name="header">Nombre</f:facet>#{c.nombre}</h:column>
+                <h:column><f:facet name="header">Créditos</f:facet>#{c.creditos}</h:column>
+                <h:column><f:facet name="header">Semestre</f:facet>#{c.semestre}</h:column>
+                <h:column><f:facet name="header">Cupos</f:facet>#{c.cuposAdmitidos}</h:column>
+                <h:column><f:facet name="header">Disponibles</f:facet>#{c.cuposDisponibles}</h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</html>

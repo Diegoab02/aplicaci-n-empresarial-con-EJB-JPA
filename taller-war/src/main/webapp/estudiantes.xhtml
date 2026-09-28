@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Estudiantes</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Estudiantes</h1>
+            <nav>
+                <h:link outcome="index" value="← Carros/Partes"/>
+                | <h:link outcome="cursos" value="Cursos"/>
+                | <h:link outcome="inscripcion" value="Inscripciones"/>
+            </nav>
+
+            <h2>Registrar estudiante</h2>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nombre:"/>
+                    <h:inputText value="#{estudianteBean.nombre}" required="true"/>
+
+                    <h:outputLabel value="Fecha de nacimiento:"/>
+                    <h:inputText value="#{estudianteBean.fechaNacimiento}" required="true">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandButton value="Registrar" action="#{estudianteBean.guardar}"/>
+            </h:form>
+
+            <h2>Estudiantes registrados</h2>
+            <h:dataTable value="#{estudianteBean.estudiantes}" var="e" border="1" cellpadding="6">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{e.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{e.nombre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fecha Nac.</f:facet>
+                    <h:outputText value="#{e.fechaNacimiento}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Edad</f:facet>
+                    #{e.edad} años
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Cursos</f:facet>
+                    <h:dataTable value="#{e.cursos}" var="cu">
+                        <h:column>#{cu.nombre}</h:column>
+                    </h:dataTable>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</html>

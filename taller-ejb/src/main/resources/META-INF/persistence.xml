@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="taller-ejbPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <!-- DataSource JNDI creado en GlassFish 4.1 -->
+        <jta-data-source>jdbc/tallerDS</jta-data-source>
+
+        <class>taller.entity.Carros</class>
+        <class>taller.entity.Partes</class>
+        <class>taller.entity.Carrospartes</class>
+        <class>taller.entity.CarrospartesPK</class>
+        <class>taller.entity.Estudiante</class>
+        <class>taller.entity.Curso</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>
+</persistence>
